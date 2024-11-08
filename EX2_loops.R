@@ -39,11 +39,11 @@ h <- hash()
 x5 <- c()
 hash_work <- 0
 
-for(i in 1:5){
+for(i in 1:5){ 
   hash_work <- hash_work + 1
   h[LETTERS[i]] <- letters[1:5]
 }
-
+h
 for(j in 1:length(h)){
   hash_work <- hash_work + 1
   x5 <- c(x5,paste(names(h)[j],h[[LETTERS[j]]],sep='_'))
@@ -92,16 +92,16 @@ while (i < 6) {   # Head of while loop + test condition
 ####################################Apply####################################
 
 # row sums for the 1st 5 rows and 1st 4 columns of IRIS
-apply(iris[1:5,0:4],MARGIN=1,FUN=sum)
+apply(iris[1:5,1:4],MARGIN=1,FUN=sum)
 
 # col means for the 1st 4 columns of IRIS
-apply(iris[,0:4],MARGIN=2,FUN=mean)
+apply(iris[,1:4],MARGIN=2,FUN=mean)
 
 # Custom function for apply
 square <- function(x){
   x^2
 }
-
+square
 # row & col custom function for the 1st 5 rows and 1st 4 columns of IRIS
 apply(iris[1:5,0:4],MARGIN=c(1,2),FUN=square)
 

@@ -29,3 +29,4 @@ ifelse('Mango' %in% y1                            # condition
                ,'Mango and Bananna is not found'  # value if both are false
        )
 )
+#unnderstand syntax and how to build from scratch

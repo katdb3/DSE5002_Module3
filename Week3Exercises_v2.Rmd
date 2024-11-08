@@ -2,7 +2,9 @@
 title: "Week 3 Exercises"
 author: "HD Sheets"
 date: "10/1/2024"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 Please complete all exercises below. You may use any library that we have covered in class UP TO THIS POINT. 
@@ -29,28 +31,29 @@ Note:
 You will probably want to use stringr
 
 ```{R}
-name_in="Sheets, Dave"
-
-reorder_name<-function(last_first){
-  #your code here
+library(stringr)
+name_in<-"Knowles, Beyonce"
+reorder_name<-function(last_first){ #defining the function
+  final_name <- str_replace(last_first, "(.*), (.*)","\\2 \\1") #(.*) matched the characters before and after the comma, and (\\2 \\1) swapped the places of the first and last name and removed the comma. 
+return(final_name) #returns the reordered final name. 
 }
-
-
+print(reorder_name(name_in))
 ```
 
 2.) Write a function that takes in a string of values x, and returns a data frame
 with three columns,  x, x^2 and the square root of x
 
 ```{R}
-x=c(1,3,5,7,9,11,13)
-
-powers_df<-function(x)
-{
-  
+x<-c(1,3,5,7,9,11,13)
+powers_df <- function(x) {
+ new_df <- data.frame(
+   x=x,
+   x_sq=x^2,
+   sqrt_x=sqrt(x)
+ )
+ return(new_df)
 }
-
-#your code here
-
+print(powers_df(x))
 ```
 
 
@@ -58,11 +61,28 @@ powers_df<-function(x)
     
     y= 0.3x if x<0
     y=0.5x if x>=0
-    
+
     This is a variant on a relu function as used in some neural networks.
+```{r}
+function_3<-function(x){
+  y<-ifelse(x<0,0.3*x,0.5*x)
+  return(y)
+  }
+print(function_3(-5))
+```
 
 4.) Write a function that takes in a value x and returns the first power of two
 greater than x  (use a While loop)
+```{r}
+function_4<-function(x){
+  power.of.two<-1
+  while(power.of.two<x){
+    power.of.two<-power.of.two* 2
+  }
+  return(power.of.two)
+}
+print(function_4(59))
+```
 
 
 5) Two Sum - Write a function named two_sum()
@@ -76,16 +96,16 @@ You can return the answer in any order.
 Example 1:
 
 Input: nums = [2,7,11,15], target = 9
-Output: [0,1]
-Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+Output: [1,2]
+Explanation: Because nums[1] + nums[2] == 9, we return [1, 2].
 Example 2:
 
 Input: nums = [3,2,4], target = 6
-Output: [1,2]
+Output: [2,3]
 Example 3:
 
 Input: nums = [3,3], target = 6
-Output: [0,1]
+Output: [1,2]
 
 Constraints:
 
@@ -103,8 +123,14 @@ Only one valid answer exists.
 
 ```{r}
 two_sum <- function(nums_vector,target){
-  #your code here
- 
+  for (i in seq_along(nums_vector)) {
+    for(j in (i+1):length(nums_vector)){
+      if(nums_vector[i]+nums_vector[j] == target){
+        return(c(i,j))
+      }
+    }
+  }
+ return(NULL)
 }
 
 
@@ -116,10 +142,6 @@ target <- 13
  
 z=two_sum(nums_vector,target)
 print(z)
-#expected answers
-#[1] 1 7
-#[1] 2 5
-#[1] 5 2
 
 ```
 
@@ -135,13 +157,23 @@ use the str_extract function from stringr
 use the same regex search pattern from each
 
 -What does \\d match to?  or alternatively [[:digit:]]
-
+#\\d matches any digit
 -How do you specify a specific number of repeated characters
+# you specify a specific number of repeated characters by using quantifiers like ?,+.*, \\d,\\D,\\s,\\S, etc.
 
 ```{R}
 a="Please call me at 456-123-2329, asap"
 b="Hey, we have a code 234 on machine a-234-12, call me at 678-321-98766"
 c="On 12-23-2022, Joe over at 122 Turnpike, dialled 912-835-4756, tell me by 9:02 pm Wed"
+
+phone_number<-"\\d{3}-\\d{3}-\\d{4}"
+phone_numberA<-str_extract(a, phone_number)
+phone_numberB<-str_extract(b, phone_number)
+phone_numberC<-str_extract(c, phone_number)
+
+print(phone_numberA)
+print(phone_numberB)
+print(phone_numberC)
 ```
 
 7.)  For lines below,  extract the domains (ie the part of the address after @)
@@ -150,6 +182,16 @@ c="On 12-23-2022, Joe over at 122 Turnpike, dialled 912-835-4756, tell me by 9:0
 d="jimmy.halibut@gmail.com"
 e="His address is:  c.brown@hopeles.org, do write him"
 f="h.potter@hogwarts.edu is bouncing back on me, I wonder why?"
+domain_d<-str_extract(d,"@[^ ]+")
+domain_e<-str_extract(e,"@[^ ]+")
+domain_f<-str_extract(f,"@[^ ]+")
+domain_d<-sub("@","",domain_d)
+domain_e<-sub("@","",domain_e)
+domain_f<-sub("@","",domain_f)
+print(domain_d)
+print(domain_e)
+print(domain_f)
+
 
 ```
 

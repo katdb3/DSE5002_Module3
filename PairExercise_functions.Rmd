@@ -75,8 +75,13 @@ x2power(3,2)
 
 Write your self a function that takes in three variables, a, b, and c
 and returns (a+b)/c
-
-
+```{r}
+new_function<-function(a,b,c)
+{new_fn=(a+b)/c
+return(new_fn)
+}
+new_function(5,3,8)
+```
 ## Default values
 
 In the declaration line,  we can set default values for the variable
@@ -150,7 +155,26 @@ Add some basic error trapping to the function you wrote.
 Make sure c is not zero
 
 ```{R}
-
+new_function<-function(a,b,c){
+  if(!is.numeric(a))
+  {
+    cat("Please enter only numeric values of a \n.")
+    return(NULL)
+  }
+  if(!is.numeric(b))
+  {
+    cat("Please enter only numeric values of b \n.")
+    return(NULL)
+  }
+  if(c==0)
+  {
+    cat("Division by 0 is not possible, please try a different value of c.")
+    return(NULL)
+  }  
+    new_fn <- (a + b) / c
+  return(new_fn)
+  }  
+new_function(5,6,7)
 ```
 
 ## Do you really have to write extensive error trapping?
@@ -191,7 +215,7 @@ my_res$kpi2
 It is not uncommon to assign variable within a function.
 
 These values are not visible outside the function, and don't alter
-values in the workspace.   This protects your variables from unexpected
+values in the workspace.   This protects your variables from unexpectedl
 changes when using a function
 
 ```{R}

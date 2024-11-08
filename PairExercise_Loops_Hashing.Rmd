@@ -136,7 +136,7 @@ Here is an example
 ```{R}
 require('hash')
 h<-hash('a'=1,'b'=2,'c'=3)
-h['a']
+h['c']
 ```
 
 ```{R}
@@ -229,7 +229,7 @@ tic()
 # --> need to using hashing to eliminate complexity)
 x4 <- character()                                          # Create empty data object
 loop_work <- 0                                             # loopwork tracks how many steps
-for(i in 1:5) {                                            # Head of first for-loop
+for(i in 1:26) {                                            # Head of first for-loop
   for(j in 1:26) {                                          # Head of nested for-loop
     loop_work <- loop_work + 1
     x4 <- c(x4, paste(LETTERS[i], letters[j], sep = "_"))  # Code block
@@ -244,7 +244,7 @@ h <- hash()
 x5 <- c()
 hash_work <- 0
 
-for(i in 1:5){
+for(i in 1:26){
   hash_work <- hash_work + 1          # count the number of assignments
   h[LETTERS[i]] <- letters[1:5]       # set letters 1-5 to be the hash contents 
                                       # at the key locations of each value in 
